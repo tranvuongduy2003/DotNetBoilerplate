@@ -13,6 +13,12 @@
 **Logging:
 - Logging is configured in "/Infrastructure/Configurations/LoggingConfiguration". I'm using Seq for storing and monitoring logs, you must run docker image for Seq (I configured it in docker-compose.yml file), or set up your logging service your self in LoggingConfiguration.
 
+**Email:
+- If you want to use Email service, fill the appsettings configuration (EmailSettings) and implement through IEmailService
+
+**Files storage service:
+- Currently I'm using Azure Blob Storage, maybe you have to create a new service for your system if you want to you another service (AWS S3, Firebase, Dictionary, ...). I will update this features by implementing Factory Pattern in next update (you can contribute by creating a merge request to increase this feature, I appreciate it very much!!!)
+
 **Docker Compose:
 - The docker-compose file are just used for demo. I set up a MSSQL and Seq image. You should implement yourself to fit with your project. To run the docker-compose file:
   - cd /src
