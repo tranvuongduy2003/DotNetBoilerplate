@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # services  
+  dotnet.db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: dotnet.db
+    environment:
+      MSSQL_SA_PASSWORD: "@Admin123"
+      ACCEPT_EULA: "Y"
+    restart: always
+    volumes:
+      - sqlserver_data:/var/lib/sqlserver/data
+    ports:
+      - "1437:1433"
+
+  dotnet.seq:
+    image: datalust/seq:latest
+    container_name: dotnet.seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5341:5341"
+      - "8081:80"
+    volumes:
+      - seq_data:/data
+
+# network section
+networks:
+  default:
+    name: dotnet
+    driver: bridge
+
+# volumes section
+volumes:
+  sqlserver_data:
+    name: sqlserver_data
+  seq_data:
+    name: seq_data
